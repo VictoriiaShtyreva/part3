@@ -1,7 +1,7 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 const PORT = 3001;
-app.use(express.json()); // to support JSON-encoded bodies
 
 let persons = [
   {
@@ -25,6 +25,20 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
+
+app.use(express.json());
+
+// Create a custom token to capture POST body data
+const customToken = (request, response) => {
+  return {
+    method: request.method,
+    url: request.url,
+    body: request.body,
+    headders: request.headers,
+  };
+};
+// Configure morgan for logging
+app.use(morgan("tiny", customToken));
 
 // implemented persons address
 app.get("/api/persons", (request, response) => {
