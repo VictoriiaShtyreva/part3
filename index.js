@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 
 require("dotenv").config();
-const PORT = process.env.PORT || 3001;
+const port = process.env.PORT || 3001;
 
 app.use(cors());
 
@@ -102,6 +102,6 @@ app.post("/api/persons", (request, response) => {
   response.json(newPerson);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
